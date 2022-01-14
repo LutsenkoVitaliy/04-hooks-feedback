@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container } from './App.styled';
 import Statistics from './components/Statistics/Statistics';
-
-
+import Section from './components/Section/Section';
+import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
 
 
 class App extends Component {
@@ -13,44 +13,37 @@ class App extends Component {
   }
 
   countTotalFeedback = () => {
-
+    return Object.values(this.state).reduce((acc, value) => acc + value, 0);
   };
 
   countPositiveFeedbackPercentage = () => {
-  
+    return Math.round((100 * this.state.good) / this.countTotalFeedback());
   };
 
+  valueIncrementLeaveFeedback = (option) => {
+    this.setState((prevstate) => ({ [option]: prevstate[option] + 1 }));
+  };
 
   render() {
     return (
     <Container>
-        <h1>Please leave feedback</h1>
-        <ul>
-          <li><button type='button' onClick={
-          () => {
-console.log('good');
-          }}>Good</button></li>
-          <li><button type='button' onClick={
-          () => {
-console.log('neutral');
-          }}>Neutral</button></li>
-          <li><button type='button' onClick={
-          () => {
-console.log('bad');
-          }}>Bad</button></li>
-        </ul>
+        <Section title={'Please leave feedback'}>
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.valueIncrementLeaveFeedback} />
+        </Section>
 
-        <h1>Statistics</h1>
-        <p>Good: {this.state.good}</p>
-        <p>Neutral: {this.state.neutral}</p>
-        <p>Bad: {this.state.bad}</p>
-        <p>Total: { }</p>
-        <p>Positive feedback: { }</p>
-        
+        <Section title={'Statistic'}>
+        <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
+        />
+        </Section>
     </Container>
   )}
 }
-
-
 
 export default App;

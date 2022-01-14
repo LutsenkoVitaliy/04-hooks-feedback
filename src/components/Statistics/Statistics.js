@@ -14,7 +14,7 @@ export default function Statistics ({ good, neutral, bad, total, positivePercent
   )
 }
 
-Statistics.PropTypes = {
+Statistics.propTypes = {
   good: PropTypes.number.isRequired,
   neutral: PropTypes.number.isRequired,
   bad: PropTypes.number.isRequired,
