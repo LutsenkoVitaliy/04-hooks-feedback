@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   countTotalFeedback = () => {
-    return Object.values(this.state).reduce((acc, value) => acc + value, 0);
+    return Object.values(this.state).reduce((accumulator, value) => accumulator + value, 0);
   };
 
   countPositiveFeedbackPercentage = () => {
