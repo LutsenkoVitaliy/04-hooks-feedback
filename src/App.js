@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container } from './App.styled';
 import Statistics from './components/Statistics';
 import Section from './components/Section';
@@ -17,7 +17,7 @@ export default function App () {
   };
 
   const valueIncrementLeaveFeedback = (option) => {
-    setState((prevstate) => ({ ...prevstate, [option]: prevstate[option] + 1 }));
+    setState((prevS) => ({ ...prevS, [option]: prevS[option] + 1 }));
   };
 
 
